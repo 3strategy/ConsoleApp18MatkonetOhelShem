@@ -1,12 +1,16 @@
-﻿namespace ConsoleApp18MatkonetOhelShem
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ConsoleApp18MatkonetOhelShem
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-            int[] a = { 1, 5, 5, 3, 2 };
-            Console.WriteLine(OleYored(a));
+            ///Console.WriteLine("Hello, World!");
+            int[] a = { 1, 5, 5, -1,9,9,9,8,-1,8,3, 2 };
+            Console.WriteLine(BiggestNumber(a));
+            char[] cc = {'g', 'a', 'g', 'c', 'b' ,'h'};
+            Switch(cc);
         }
         //question 1
         static bool OleYored(int[] arr)
@@ -69,20 +73,39 @@
         }
 
         //question 3
-        public void Switch(char[] arr)
+        public static void Switch(char[] arr)
         {
             for (int i = 0; i < arr.Length/2; i++)
             {
                 if (arr[i] + 1 == arr[^(i+1)])
                 {
                     char tmp = arr[i];
-                    arr[i] = arr[i + 1];
-                    arr[i + 1] = tmp;
+                    arr[i] = arr[^(i + 1)];
+                    arr[^(i + 1)] = tmp;
                 }    
             }
         }
 
         //question 4
+        public static int BiggestNumber(int[] arr)
+        {
+            // -1 signifies a new number is coming
+            int n = 0, max = int.MinValue;
+            foreach (var dig in arr)
+            {
+                if (dig > -1)
+                    n = n * 10 + dig;
+                else // new number starts now
+                {
+                    if (n > max)
+                        max = n;
+                    n = 0;
+                }
+            }
+            if (n > max) 
+                return n;
+            return max;
+        }
 
 
     }
