@@ -16,7 +16,7 @@ namespace ConsoleApp18MatkonetOhelShem
             Switch(cc);
         }
         //question 1
-        static bool OleYored(int[] arr)
+        public static bool OleYored(int[] arr)
         {
             int i;
             for (i = 0; i < arr.Length - 1; i++)
@@ -30,6 +30,35 @@ namespace ConsoleApp18MatkonetOhelShem
             for (; i < arr.Length - 1; i++) // continue from where we stopped
                 if (arr[i + 1] >= arr[i])
                     return false;
+
+            return true;
+        }
+
+        // לקבל מערך שלמים ולראות אם הוא עולה ממש ואחר כך יורד ממש
+        // 5 8 9 7 3=ok    1 3 3 1 not ok.     not ok 1 5,5 7 8 7 7 5 2 
+        // 1 2 2 3 1 =not ok.     5 3 1 not ok
+        // וידוע שיש לפחות 3 איברים
+        public static bool OleYored2(int[] arr)
+        {
+            int prevNum = arr[0];
+            int ind = 0;
+            for (int i = 1; i < arr.Length; i++)
+            {
+                ind = i;
+                if (prevNum >= arr[i])
+                {
+                    break;
+                }
+                prevNum = arr[i];
+            }
+            for (int i = ind; i < arr.Length; i++)
+            {
+                if (prevNum <= arr[i])
+                {
+                    return false;
+                }
+                prevNum = arr[i];
+            }
 
             return true;
         }
