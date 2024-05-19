@@ -13,82 +13,91 @@ namespace ConsoleApp18MatkonetOhelShem
         //question 5a
         private int code;
 
-        private string location;
-
-        //question 5b
-        public Tree(string location, int code)
+		private string location;
+		//סעיף ב
+        public Tree(int code, string location)
         {
-            this.location = location;
             this.code = code;
+			this.location = location;
         }
-        #region this part is not required
+		public bool SameLocation(Tree other)
+		{
+			if (other.location == this.location)
+				return true;
+			return false;
+		}
+        public bool SameLocation1(Tree other)
+        {
+			return other.location == this.location;
+        }
+        public bool SameLocation2(Tree other) => other.location == this.location;
+        
+        #region not needed
         public string GetLocation()
-        {
-            return location;
-        }
-        public void SetLocation(string value)
-        {
-            location = value;
-        }
-        public int GetCode()
-        {
-            return code;
-        }
-        public void SetCode(int value)
-        {
-            code = value;
-        }
+		{
+			return location;
+		}
+		public void SetLocation(string value)
+		{
+			location = value;
+		}
+		public int GetCode()
+		{
+			return code;
+		}
+		public void SetCode(int value)
+		{
+			code = value;
+		}
         #endregion
-        //question 5c.
-        public bool SameLocation(Tree other) => location == other.location;
-
-
     }
     internal class StatusReport
     {
+		//private Tree[] arr = new Tree[1000];
+		private int st;
+		private Tree[] arr;
+		private int count;
 
-        private int code;
-        private Tree[] arr;
-        private int count = 0;// אולי לא הוגדר. בכל מקרה נחוץ
-        public StatusReport(int code, Tree[] trees) // if we have a100000 trees
+		// סעיף ה
+        public StatusReport(Tree[] trees, int st)
         {
-            this.code = code;
-            arr = new Tree[1000];
+			arr = new Tree[1000];
+			count = 0;
+			this.st = st;
 
-            for (int i = 0; i < trees.Length; i++)
-            {
-                if (trees[i].GetCode() == code)
-                {
+			for (int i = 0; i < trees.Length; i++)
+			{
+				if (trees[i].GetCode() == st)
+				{
+                    if (count == 1000)
+                    {   // exceeding index 999
+                        Console.WriteLine("too many trees");
+						break;
+                    }
                     arr[count] = trees[i];
-                    count++;
-                }
-                if (count == 1000) //avoid index ouf of range.
-                    break;
-            }
-        }
-        private static Random rnd= new Random();
-        /// <summary>
-        /// מגרילה עץ מתוך המלאי הקיים
-        /// </summary>
-        /// <param name="code"></param>
-        public Tree GetTree(int code)
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                int ind = rnd.Next(count);
-                if (arr[ind].GetCode() == code)
-                    return arr[ind];
-            }
-            return default(Tree); //
+					count++; // מייצג את המקום הפנוי הבא
+					
+				}
+			}
         }
 
-        public int GetCode()
-        {
-            return code;
-        }
-        public void SetCode(int value)
-        {
-            code = value;
-        }
+        public int GetCount()
+		{
+			return count;
+		}
+		public void SetCount(int value)
+		{
+			count = value;
+		}
+
+		public int GetSt()
+		{
+			return st;
+		}
+		public void SetSt(int value)
+		{
+			st = value;
+		}
+
     }
 }
