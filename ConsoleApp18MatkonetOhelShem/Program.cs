@@ -6,6 +6,10 @@ namespace ConsoleApp18MatkonetOhelShem
     {
         static void Main(string[] args)
         {
+            Tree[] tresssss = new Tree[100];
+
+            StatusReport SR = new StatusReport(3, tresssss);
+            Tree t = SR.GetTree(3);
             ///Console.WriteLine("Hello, World!");
             int[] a = { 1, 5, 5, -1,9,9,9,8,-1,8,3, 2 };
             Console.WriteLine(BiggestNumber(a));
